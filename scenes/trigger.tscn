@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://0b8v22uc4rk6"]
+
+[ext_resource type="Script" path="res://scenes/trigger.gd" id="1_arqne"]
+
+[node name="Trigger" type="Area2D"]
+position = Vector2(139, 76.25)
+collision_layer = 7
+collision_mask = 7
+script = ExtResource("1_arqne")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

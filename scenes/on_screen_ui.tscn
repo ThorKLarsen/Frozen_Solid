@@ -1,0 +1,1493 @@
+[gd_scene load_steps=69 format=3 uid="uid://blsb5no04kqj4"]
+
+[ext_resource type="Texture2D" uid="uid://dkrfphw8ydgar" path="res://assets/rock_tilesheet.png" id="1_f57up"]
+[ext_resource type="Material" uid="uid://dm4rlevqxr3m8" path="res://game_shader.tres" id="1_hn1m1"]
+[ext_resource type="Script" path="res://scenes/on_screen_ui.gd" id="1_oyxrn"]
+[ext_resource type="LabelSettings" uid="uid://dli8jq3q3ryud" path="res://simple_number_settings.tres" id="2_ikgjb"]
+[ext_resource type="Script" path="res://scenes/health_bar.gd" id="3_60ec0"]
+[ext_resource type="Script" path="res://scenes/stone_counter.gd" id="3_bsl3i"]
+[ext_resource type="Script" path="res://scenes/cold_bar.gd" id="3_hbsyg"]
+[ext_resource type="Script" path="res://scenes/ore_counter.gd" id="4_5ryud"]
+[ext_resource type="Script" path="res://scenes/gem_counter.gd" id="5_nr30b"]
+[ext_resource type="Script" path="res://scenes/inventory_capacity.gd" id="6_ibr6l"]
+[ext_resource type="Script" path="res://scenes/credits_counter.gd" id="7_f6jg7"]
+[ext_resource type="Script" path="res://scenes/inventory_menu.gd" id="9_0a5kh"]
+[ext_resource type="Script" path="res://scenes/torch_counter.gd" id="9_02s2v"]
+[ext_resource type="PackedScene" uid="uid://dv6ih4eug8pv6" path="res://scenes/my_button.tscn" id="10_1nna4"]
+[ext_resource type="FontFile" uid="uid://dc3m5mp1qmile" path="res://font/PixelOperator.ttf" id="10_2xb01"]
+[ext_resource type="Script" path="res://scenes/crafting_menu.gd" id="11_yjgco"]
+[ext_resource type="AudioStream" uid="uid://cqv331o48c001" path="res://sound/UI/blip-2.wav" id="16_cee4l"]
+[ext_resource type="Script" path="res://scenes/text_box.gd" id="16_hv03o"]
+[ext_resource type="AudioStream" uid="uid://bvf52ljgickx0" path="res://sound/UI/warning.wav" id="17_1jvnl"]
+[ext_resource type="Script" path="res://scenes/payout_summary.gd" id="21_n4ogb"]
+[ext_resource type="Script" path="res://scenes/count_stone.gd" id="22_1mbky"]
+[ext_resource type="Script" path="res://scenes/calculation_stone.gd" id="23_enjcg"]
+[ext_resource type="Script" path="res://scenes/count_ore.gd" id="23_ndm4e"]
+[ext_resource type="Script" path="res://scenes/result_stone.gd" id="24_aonb6"]
+[ext_resource type="Script" path="res://scenes/count_gem.gd" id="24_jbl2q"]
+[ext_resource type="Script" path="res://scenes/calculation_ore.gd" id="25_wnvmw"]
+[ext_resource type="Script" path="res://scenes/result_ore.gd" id="27_gt1a0"]
+[ext_resource type="Script" path="res://scenes/calculation_gem.gd" id="27_yh4y6"]
+[ext_resource type="Script" path="res://scenes/result_gem.gd" id="30_lkfir"]
+[ext_resource type="Script" path="res://scenes/sum.gd" id="31_nqenw"]
+[ext_resource type="Script" path="res://scenes/upgrade_menu.gd" id="32_ey0yo"]
+[ext_resource type="Script" path="res://scenes/upgrade.gd" id="32_t4hq1"]
+[ext_resource type="Script" path="res://scenes/gem_upgrade.gd" id="33_4rdue"]
+[ext_resource type="Script" path="res://scenes/cap_upgrade.gd" id="34_qqnjh"]
+[ext_resource type="Script" path="res://scenes/ore_val_upgrade.gd" id="35_rlfe3"]
+[ext_resource type="Script" path="res://scenes/warm_upgrade.gd" id="36_683pa"]
+[ext_resource type="Script" path="res://scenes/ore_quant_upgrade.gd" id="37_kboe4"]
+[ext_resource type="Script" path="res://scenes/inventory_warning.gd" id="38_j6bm2"]
+[ext_resource type="Script" path="res://scenes/freeze_warning.gd" id="39_o8l7i"]
+[ext_resource type="Texture2D" uid="uid://cwgi6ouc63ynn" path="res://assets/FROZENSOLID.png" id="40_sur5v"]
+[ext_resource type="Script" path="res://scenes/instructions.gd" id="41_kntn7"]
+[ext_resource type="Script" path="res://scenes/win_screen.gd" id="42_l7o8l"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6x8w1"]
+atlas = ExtResource("1_f57up")
+region = Rect2(0, 64, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_snsgi"]
+atlas = ExtResource("1_f57up")
+region = Rect2(25, 65, 5, 5)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e7xdn"]
+atlas = ExtResource("1_f57up")
+region = Rect2(0, 89, 8, 5)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rv40a"]
+atlas = ExtResource("1_f57up")
+region = Rect2(0, 97, 8, 5)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lv05m"]
+atlas = ExtResource("1_f57up")
+region = Rect2(25, 81, 5, 5)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tkg80"]
+atlas = ExtResource("1_f57up")
+region = Rect2(32, 64, 8, 8)
+
+[sub_resource type="LabelSettings" id="LabelSettings_63s0y"]
+line_spacing = -4.0
+font = ExtResource("10_2xb01")
+shadow_size = 0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f2txg"]
+atlas = ExtResource("1_f57up")
+region = Rect2(32, 72, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q77o1"]
+atlas = ExtResource("1_f57up")
+region = Rect2(24, 72, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sq6gb"]
+atlas = ExtResource("1_f57up")
+region = Rect2(32, 80, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_btske"]
+atlas = ExtResource("1_f57up")
+region = Rect2(56, 48, 8, 8)
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_174sq"]
+random_pitch = 1.2
+streams_count = 1
+stream_0/stream = ExtResource("16_cee4l")
+
+[sub_resource type="LabelSettings" id="LabelSettings_buk7n"]
+font = ExtResource("10_2xb01")
+shadow_size = 0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_spyoo"]
+atlas = ExtResource("1_f57up")
+region = Rect2(56, 48, 8, 8)
+
+[sub_resource type="LabelSettings" id="LabelSettings_nv7fd"]
+font = ExtResource("10_2xb01")
+font_size = 32
+shadow_size = 0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6fbhe"]
+atlas = ExtResource("1_f57up")
+region = Rect2(24, 72, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y77od"]
+atlas = ExtResource("1_f57up")
+region = Rect2(32, 72, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_frpe6"]
+atlas = ExtResource("1_f57up")
+region = Rect2(32, 72, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2286m"]
+atlas = ExtResource("1_f57up")
+region = Rect2(32, 64, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tthh4"]
+atlas = ExtResource("1_f57up")
+region = Rect2(24, 72, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xcbf4"]
+atlas = ExtResource("1_f57up")
+region = Rect2(32, 80, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7fjhn"]
+atlas = ExtResource("1_f57up")
+region = Rect2(32, 64, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1ptxq"]
+atlas = ExtResource("1_f57up")
+region = Rect2(32, 64, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7umv5"]
+atlas = ExtResource("1_f57up")
+region = Rect2(48, 64, 8, 8)
+
+[sub_resource type="LabelSettings" id="LabelSettings_5dksh"]
+font = ExtResource("10_2xb01")
+font_color = Color(0, 0, 0, 1)
+shadow_size = 0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mevie"]
+atlas = ExtResource("1_f57up")
+region = Rect2(24, 80, 8, 8)
+
+[node name="CanvasLayer" type="CanvasLayer" node_paths=PackedStringArray("confirm", "payout_summary", "upgrade_menu")]
+scale = Vector2(3, 3)
+transform = Transform2D(3, 0, 0, 3, 0, 0)
+script = ExtResource("1_oyxrn")
+confirm = NodePath("Control/Confirm")
+payout_summary = NodePath("Control/PayoutSummary")
+upgrade_menu = NodePath("Control/UpgradeMenu")
+
+[node name="Control" type="Control" parent="."]
+material = ExtResource("1_hn1m1")
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -960.0
+offset_bottom = -480.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="InventoryStats" type="NinePatchRect" parent="Control"]
+use_parent_material = true
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = -5.0
+offset_right = 64.0
+grow_vertical = 2
+texture = SubResource("AtlasTexture_6x8w1")
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/InventoryStats"]
+use_parent_material = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = 3.0
+offset_right = -3.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Health" type="HBoxContainer" parent="Control/InventoryStats/VBoxContainer"]
+use_parent_material = true
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Control/InventoryStats/VBoxContainer/Health"]
+use_parent_material = true
+layout_mode = 2
+texture = SubResource("AtlasTexture_snsgi")
+stretch_mode = 5
+
+[node name="HealthBar" type="TextureProgressBar" parent="Control/InventoryStats/VBoxContainer/Health"]
+use_parent_material = true
+custom_minimum_size = Vector2(0, 7)
+layout_mode = 2
+size_flags_horizontal = 3
+value = 100.0
+nine_patch_stretch = true
+stretch_margin_left = 1
+stretch_margin_top = 1
+stretch_margin_right = 4
+stretch_margin_bottom = 1
+texture_under = SubResource("AtlasTexture_e7xdn")
+texture_progress = SubResource("AtlasTexture_rv40a")
+texture_progress_offset = Vector2(-1, 0)
+script = ExtResource("3_60ec0")
+
+[node name="Cold" type="HBoxContainer" parent="Control/InventoryStats/VBoxContainer"]
+use_parent_material = true
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Control/InventoryStats/VBoxContainer/Cold"]
+use_parent_material = true
+layout_mode = 2
+texture = SubResource("AtlasTexture_lv05m")
+stretch_mode = 5
+
+[node name="ColdBar" type="TextureProgressBar" parent="Control/InventoryStats/VBoxContainer/Cold"]
+use_parent_material = true
+custom_minimum_size = Vector2(0, 7)
+layout_mode = 2
+size_flags_horizontal = 3
+value = 80.0
+rounded = true
+nine_patch_stretch = true
+stretch_margin_left = 1
+stretch_margin_top = 1
+stretch_margin_right = 4
+stretch_margin_bottom = 1
+texture_under = SubResource("AtlasTexture_e7xdn")
+texture_progress = SubResource("AtlasTexture_rv40a")
+texture_progress_offset = Vector2(-1, 0)
+script = ExtResource("3_hbsyg")
+
+[node name="Credits" type="HBoxContainer" parent="Control/InventoryStats/VBoxContainer"]
+use_parent_material = true
+layout_mode = 2
+
+[node name="CreditsCounter" type="Label" parent="Control/InventoryStats/VBoxContainer/Credits"]
+use_parent_material = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0
+"
+label_settings = ExtResource("2_ikgjb")
+horizontal_alignment = 2
+script = ExtResource("7_f6jg7")
+
+[node name="TextureRect" type="TextureRect" parent="Control/InventoryStats/VBoxContainer/Credits"]
+use_parent_material = true
+layout_mode = 2
+texture = SubResource("AtlasTexture_tkg80")
+stretch_mode = 5
+
+[node name="InventoryCapacity" type="Label" parent="Control/InventoryStats/VBoxContainer"]
+use_parent_material = true
+layout_mode = 2
+text = "Capacity:
+20/20"
+label_settings = SubResource("LabelSettings_63s0y")
+script = ExtResource("6_ibr6l")
+
+[node name="Stone" type="HBoxContainer" parent="Control/InventoryStats/VBoxContainer"]
+use_parent_material = true
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Control/InventoryStats/VBoxContainer/Stone"]
+use_parent_material = true
+layout_mode = 2
+texture = SubResource("AtlasTexture_f2txg")
+stretch_mode = 5
+
+[node name="StoneCounter" type="Label" parent="Control/InventoryStats/VBoxContainer/Stone"]
+use_parent_material = true
+layout_mode = 2
+text = "0"
+label_settings = ExtResource("2_ikgjb")
+script = ExtResource("3_bsl3i")
+
+[node name="Ore" type="HBoxContainer" parent="Control/InventoryStats/VBoxContainer"]
+use_parent_material = true
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Control/InventoryStats/VBoxContainer/Ore"]
+use_parent_material = true
+layout_mode = 2
+texture = SubResource("AtlasTexture_q77o1")
+stretch_mode = 5
+
+[node name="OreCounter" type="Label" parent="Control/InventoryStats/VBoxContainer/Ore"]
+use_parent_material = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0
+"
+label_settings = ExtResource("2_ikgjb")
+script = ExtResource("4_5ryud")
+
+[node name="Gems" type="HBoxContainer" parent="Control/InventoryStats/VBoxContainer"]
+use_parent_material = true
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Control/InventoryStats/VBoxContainer/Gems"]
+use_parent_material = true
+layout_mode = 2
+texture = SubResource("AtlasTexture_sq6gb")
+stretch_mode = 5
+
+[node name="GemCounter" type="Label" parent="Control/InventoryStats/VBoxContainer/Gems"]
+use_parent_material = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0
+"
+label_settings = ExtResource("2_ikgjb")
+script = ExtResource("5_nr30b")
+
+[node name="Torches" type="HBoxContainer" parent="Control/InventoryStats/VBoxContainer"]
+use_parent_material = true
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Control/InventoryStats/VBoxContainer/Torches"]
+use_parent_material = true
+layout_mode = 2
+texture = SubResource("AtlasTexture_btske")
+stretch_mode = 5
+
+[node name="TorchCounter" type="Label" parent="Control/InventoryStats/VBoxContainer/Torches"]
+use_parent_material = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0
+"
+label_settings = ExtResource("2_ikgjb")
+script = ExtResource("9_02s2v")
+
+[node name="Label" type="Label" parent="Control/InventoryStats"]
+use_parent_material = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -29.5
+offset_top = -48.0
+offset_right = 30.5
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Controls:
+E - Craft
+M - Mine"
+label_settings = ExtResource("2_ikgjb")
+vertical_alignment = 2
+
+[node name="TextBox" type="NinePatchRect" parent="Control"]
+use_parent_material = true
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -135.0
+offset_top = -52.0
+offset_right = 135.0
+grow_horizontal = 2
+texture = SubResource("AtlasTexture_6x8w1")
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+script = ExtResource("16_hv03o")
+
+[node name="TextLayer" type="CanvasLayer" parent="Control/TextBox"]
+physics_interpolation_mode = 1
+layer = 2
+offset = Vector2(0, -156)
+transform = Transform2D(1, 0, 0, 1, 0, -156)
+
+[node name="TextField" type="RichTextLabel" parent="Control/TextBox/TextLayer"]
+material = ExtResource("1_hn1m1")
+use_parent_material = true
+offset_left = 326.0
+offset_top = 11.0
+offset_right = 1114.0
+offset_bottom = 137.0
+bbcode_enabled = true
+text = "[font=res://font/PixelOperator.ttf][font_size=32]I need you to start mining, i don’t care if the ground is still FROZEN SOLID. I’m coming back here in 10 Days, and you better have 10k ores for me."
+scroll_active = false
+scroll_following = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer" parent="Control/TextBox"]
+stream = SubResource("AudioStreamRandomizer_174sq")
+volume_db = -20.0
+pitch_scale = 1.2
+bus = &"UI"
+
+[node name="PopupMenu" type="NinePatchRect" parent="Control" node_paths=PackedStringArray("text_box")]
+use_parent_material = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.1
+anchor_right = 0.1
+anchor_bottom = 1.0
+offset_left = 32.0
+offset_top = 237.0
+offset_right = 416.0
+offset_bottom = 237.0
+grow_vertical = 2
+texture = SubResource("AtlasTexture_6x8w1")
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+script = ExtResource("9_0a5kh")
+text_box = NodePath("../TextBox")
+
+[node name="MenuOpen" type="AudioStreamPlayer2D" parent="Control/PopupMenu"]
+stream = ExtResource("16_cee4l")
+pitch_scale = 1.5
+bus = &"UI"
+
+[node name="CraftingMenu" type="VBoxContainer" parent="Control/PopupMenu"]
+use_parent_material = true
+layout_mode = 2
+offset_right = 384.0
+offset_bottom = 186.0
+script = ExtResource("11_yjgco")
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/PopupMenu/CraftingMenu"]
+use_parent_material = true
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/PopupMenu/CraftingMenu/MarginContainer"]
+use_parent_material = true
+layout_mode = 2
+
+[node name="TorchCraftButton" parent="Control/PopupMenu/CraftingMenu/MarginContainer/HBoxContainer" instance=ExtResource("10_1nna4")]
+layout_mode = 2
+
+[node name="Label3" type="Label" parent="Control/PopupMenu/CraftingMenu/MarginContainer/HBoxContainer/TorchCraftButton"]
+use_parent_material = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.0
+offset_top = -16.0
+offset_right = 28.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Craft"
+label_settings = SubResource("LabelSettings_buk7n")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Control/PopupMenu/CraftingMenu/MarginContainer/HBoxContainer"]
+use_parent_material = true
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = SubResource("AtlasTexture_spyoo")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Control/PopupMenu/CraftingMenu/MarginContainer/HBoxContainer"]
+use_parent_material = true
+layout_mode = 2
+text = "= 2 x"
+label_settings = SubResource("LabelSettings_nv7fd")
+
+[node name="TextureRect2" type="TextureRect" parent="Control/PopupMenu/CraftingMenu/MarginContainer/HBoxContainer"]
+use_parent_material = true
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = SubResource("AtlasTexture_6fbhe")
+stretch_mode = 5
+
+[node name="Label2" type="Label" parent="Control/PopupMenu/CraftingMenu/MarginContainer/HBoxContainer"]
+use_parent_material = true
+layout_mode = 2
+text = "+ "
+label_settings = SubResource("LabelSettings_nv7fd")
+
+[node name="TextureRect3" type="TextureRect" parent="Control/PopupMenu/CraftingMenu/MarginContainer/HBoxContainer"]
+use_parent_material = true
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = SubResource("AtlasTexture_y77od")
+stretch_mode = 5
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Control/PopupMenu/CraftingMenu/MarginContainer"]
+layout_mode = 2
+
+[node name="PayoutSummary" type="NinePatchRect" parent="Control" node_paths=PackedStringArray("grid")]
+visible = false
+use_parent_material = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -107.0
+offset_top = -79.5
+offset_right = 107.0
+offset_bottom = 79.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_6x8w1")
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+script = ExtResource("21_n4ogb")
+grid = NodePath("MarginContainer/VBoxContainer2/VBoxContainer")
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/PayoutSummary"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Control/PayoutSummary/MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="GridContainer" parent="Control/PayoutSummary/MarginContainer/VBoxContainer2"]
+layout_mode = 2
+columns = 5
+
+[node name="Count" type="Label" parent="Control/PayoutSummary/MarginContainer/VBoxContainer2/VBoxContainer"]
+layout_mode = 2
+text = "2"
+label_settings = ExtResource("2_ikgjb")
+script = ExtResource("22_1mbky")
+
+[node name="TextureRect" type="TextureRect" parent="Control/PayoutSummary/MarginContainer/VBoxContainer2/VBoxContainer"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_frpe6")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Calculation" type="Label" parent="Control/PayoutSummary/MarginContainer/VBoxContainer2/VBoxContainer"]
+layout_mode = 2
+text = "= 2 x 1"
+label_settings = ExtResource("2_ikgjb")
+script = ExtResource("23_enjcg")
+
+[node name="Result" type="Label" parent="Control/PayoutSummary/MarginContainer/VBoxContainer2/VBoxContainer"]
+layout_mode = 2
+text = "= 2"
+label_settings = ExtResource("2_ikgjb")
+script = ExtResource("24_aonb6")
+
+[node name="TextureRect2" type="TextureRect" parent="Control/PayoutSummary/MarginContainer/VBoxContainer2/VBoxContainer"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_2286m")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Count2" type="Label" parent="Control/PayoutSummary/MarginContainer/VBoxContainer2/VBoxContainer"]
+layout_mode = 2
+text = "2"
+label_settings = ExtResource("2_ikgjb")
+script = ExtResource("23_ndm4e")
+
+[node name="TextureRect3" type="TextureRect" parent="Control/PayoutSummary/MarginContainer/VBoxContainer2/VBoxContainer"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_tthh4")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Calculation2" type="Label" parent="Control/PayoutSummary/MarginContainer/VBoxContainer2/VBoxContainer"]
+layout_mode = 2
+text = "= 2 x 1"
+label_settings = ExtResource("2_ikgjb")
+script = ExtResource("25_wnvmw")
+
+[node name="Result2" type="Label" parent="Control/PayoutSummary/MarginContainer/VBoxContainer2/VBoxContainer"]
+layout_mode = 2
+text = "= 2"
+label_settings = ExtResource("2_ikgjb")
+script = ExtResource("27_gt1a0")
+
+[node name="TextureRect4" type="TextureRect" parent="Control/PayoutSummary/MarginContainer/VBoxContainer2/VBoxContainer"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_2286m")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Count3" type="Label" parent="Control/PayoutSummary/MarginContainer/VBoxContainer2/VBoxContainer"]
+layout_mode = 2
+text = "2"
+label_settings = ExtResource("2_ikgjb")
+script = ExtResource("24_jbl2q")
+
+[node name="TextureRect5" type="TextureRect" parent="Control/PayoutSummary/MarginContainer/VBoxContainer2/VBoxContainer"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_xcbf4")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Calculation3" type="Label" parent="Control/PayoutSummary/MarginContainer/VBoxContainer2/VBoxContainer"]
+layout_mode = 2
+text = "= 2 x 1"
+label_settings = ExtResource("2_ikgjb")
+script = ExtResource("27_yh4y6")
+
+[node name="Result3" type="Label" parent="Control/PayoutSummary/MarginContainer/VBoxContainer2/VBoxContainer"]
+layout_mode = 2
+text = "= 2"
+label_settings = ExtResource("2_ikgjb")
+script = ExtResource("30_lkfir")
+
+[node name="TextureRect6" type="TextureRect" parent="Control/PayoutSummary/MarginContainer/VBoxContainer2/VBoxContainer"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_2286m")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/PayoutSummary/MarginContainer/VBoxContainer2"]
+layout_mode = 2
+alignment = 2
+
+[node name="Label" type="Label" parent="Control/PayoutSummary/MarginContainer/VBoxContainer2/HBoxContainer"]
+layout_mode = 2
+text = "6"
+label_settings = ExtResource("2_ikgjb")
+horizontal_alignment = 2
+script = ExtResource("31_nqenw")
+
+[node name="ClosePayout" type="TextureRect" parent="Control/PayoutSummary/MarginContainer/VBoxContainer2/HBoxContainer"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_7fjhn")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="MyButton" parent="Control/PayoutSummary" instance=ExtResource("10_1nna4")]
+custom_minimum_size = Vector2(64, 32)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -32.0
+offset_top = -40.0
+offset_right = 32.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 0
+input_shortcut = "ui_accept"
+
+[node name="Label" type="Label" parent="Control/PayoutSummary/MyButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Done"
+label_settings = ExtResource("2_ikgjb")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Confirm" type="NinePatchRect" parent="Control"]
+visible = false
+use_parent_material = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -107.0
+offset_top = -47.5
+offset_right = 107.0
+offset_bottom = 47.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_6x8w1")
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/Confirm"]
+use_parent_material = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Confirm/MarginContainer"]
+use_parent_material = true
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="Control/Confirm/MarginContainer/VBoxContainer"]
+use_parent_material = true
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+text = "Are you sure you want exit and start day 1"
+label_settings = ExtResource("2_ikgjb")
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="BoxContainer" type="HBoxContainer" parent="Control/Confirm/MarginContainer/VBoxContainer"]
+use_parent_material = true
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="ConfirmNo" parent="Control/Confirm/MarginContainer/VBoxContainer/BoxContainer" instance=ExtResource("10_1nna4")]
+custom_minimum_size = Vector2(64, 32)
+layout_mode = 2
+input_shortcut = "ui_cancel"
+
+[node name="Label" type="Label" parent="Control/Confirm/MarginContainer/VBoxContainer/BoxContainer/ConfirmNo"]
+use_parent_material = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "No"
+label_settings = ExtResource("2_ikgjb")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ConfirmYes" parent="Control/Confirm/MarginContainer/VBoxContainer/BoxContainer" instance=ExtResource("10_1nna4")]
+layout_mode = 2
+input_shortcut = "ui_accept"
+
+[node name="Label" type="Label" parent="Control/Confirm/MarginContainer/VBoxContainer/BoxContainer/ConfirmYes"]
+use_parent_material = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Yes"
+label_settings = ExtResource("2_ikgjb")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="UpgradeMenu" type="NinePatchRect" parent="Control"]
+visible = false
+use_parent_material = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -230.0
+offset_top = -200.0
+offset_right = 230.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = SubResource("AtlasTexture_6x8w1")
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+script = ExtResource("32_ey0yo")
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/UpgradeMenu"]
+use_parent_material = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -224.5
+offset_top = -76.5
+offset_right = 224.5
+offset_bottom = 44.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="VBoxContainer" type="GridContainer" parent="Control/UpgradeMenu/MarginContainer"]
+use_parent_material = true
+layout_mode = 2
+columns = 2
+
+[node name="SpeedUpgrade" type="HBoxContainer" parent="Control/UpgradeMenu/MarginContainer/VBoxContainer" node_paths=PackedStringArray("price_tag")]
+use_parent_material = true
+layout_mode = 2
+script = ExtResource("32_t4hq1")
+price_tag = NodePath("Price")
+
+[node name="MyButton" parent="Control/UpgradeMenu/MarginContainer/VBoxContainer/SpeedUpgrade" instance=ExtResource("10_1nna4")]
+custom_minimum_size = Vector2(64, 32)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/UpgradeMenu/MarginContainer/VBoxContainer/SpeedUpgrade/MyButton"]
+use_parent_material = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Buy"
+label_settings = ExtResource("2_ikgjb")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="Control/UpgradeMenu/MarginContainer/VBoxContainer/SpeedUpgrade"]
+use_parent_material = true
+layout_mode = 2
+text = "+20% Mining
+Speed"
+label_settings = ExtResource("2_ikgjb")
+
+[node name="Price" type="Label" parent="Control/UpgradeMenu/MarginContainer/VBoxContainer/SpeedUpgrade"]
+use_parent_material = true
+layout_mode = 2
+text = "100"
+label_settings = ExtResource("2_ikgjb")
+
+[node name="TextureRect" type="TextureRect" parent="Control/UpgradeMenu/MarginContainer/VBoxContainer/SpeedUpgrade"]
+use_parent_material = true
+layout_mode = 2
+texture = SubResource("AtlasTexture_1ptxq")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="GemUpgrade" type="HBoxContainer" parent="Control/UpgradeMenu/MarginContainer/VBoxContainer" node_paths=PackedStringArray("price_tag")]
+use_parent_material = true
+layout_mode = 2
+script = ExtResource("33_4rdue")
+price_tag = NodePath("Label2")
+
+[node name="MyButton" parent="Control/UpgradeMenu/MarginContainer/VBoxContainer/GemUpgrade" instance=ExtResource("10_1nna4")]
+custom_minimum_size = Vector2(64, 32)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/UpgradeMenu/MarginContainer/VBoxContainer/GemUpgrade/MyButton"]
+use_parent_material = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Buy"
+label_settings = ExtResource("2_ikgjb")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="Control/UpgradeMenu/MarginContainer/VBoxContainer/GemUpgrade"]
+use_parent_material = true
+layout_mode = 2
+text = "+100% 
+Gem Value"
+label_settings = ExtResource("2_ikgjb")
+
+[node name="Label2" type="Label" parent="Control/UpgradeMenu/MarginContainer/VBoxContainer/GemUpgrade"]
+use_parent_material = true
+layout_mode = 2
+text = "100"
+label_settings = ExtResource("2_ikgjb")
+
+[node name="TextureRect" type="TextureRect" parent="Control/UpgradeMenu/MarginContainer/VBoxContainer/GemUpgrade"]
+use_parent_material = true
+layout_mode = 2
+texture = SubResource("AtlasTexture_1ptxq")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="CapUpgrade" type="HBoxContainer" parent="Control/UpgradeMenu/MarginContainer/VBoxContainer" node_paths=PackedStringArray("price_tag")]
+use_parent_material = true
+layout_mode = 2
+script = ExtResource("34_qqnjh")
+price_tag = NodePath("Label2")
+
+[node name="MyButton" parent="Control/UpgradeMenu/MarginContainer/VBoxContainer/CapUpgrade" instance=ExtResource("10_1nna4")]
+custom_minimum_size = Vector2(64, 32)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/UpgradeMenu/MarginContainer/VBoxContainer/CapUpgrade/MyButton"]
+use_parent_material = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Buy"
+label_settings = ExtResource("2_ikgjb")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="Control/UpgradeMenu/MarginContainer/VBoxContainer/CapUpgrade"]
+use_parent_material = true
+layout_mode = 2
+text = "+20 Inventory
+ Capacity"
+label_settings = ExtResource("2_ikgjb")
+
+[node name="Label2" type="Label" parent="Control/UpgradeMenu/MarginContainer/VBoxContainer/CapUpgrade"]
+use_parent_material = true
+layout_mode = 2
+text = "200"
+label_settings = ExtResource("2_ikgjb")
+
+[node name="TextureRect" type="TextureRect" parent="Control/UpgradeMenu/MarginContainer/VBoxContainer/CapUpgrade"]
+use_parent_material = true
+layout_mode = 2
+texture = SubResource("AtlasTexture_1ptxq")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="OreValUpgrade" type="HBoxContainer" parent="Control/UpgradeMenu/MarginContainer/VBoxContainer" node_paths=PackedStringArray("price_tag")]
+use_parent_material = true
+layout_mode = 2
+script = ExtResource("35_rlfe3")
+price_tag = NodePath("Label2")
+
+[node name="MyButton" parent="Control/UpgradeMenu/MarginContainer/VBoxContainer/OreValUpgrade" instance=ExtResource("10_1nna4")]
+custom_minimum_size = Vector2(64, 32)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/UpgradeMenu/MarginContainer/VBoxContainer/OreValUpgrade/MyButton"]
+use_parent_material = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Buy"
+label_settings = ExtResource("2_ikgjb")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="Control/UpgradeMenu/MarginContainer/VBoxContainer/OreValUpgrade"]
+use_parent_material = true
+layout_mode = 2
+text = "+50% 
+Ore Value"
+label_settings = ExtResource("2_ikgjb")
+
+[node name="Label2" type="Label" parent="Control/UpgradeMenu/MarginContainer/VBoxContainer/OreValUpgrade"]
+use_parent_material = true
+layout_mode = 2
+text = "200"
+label_settings = ExtResource("2_ikgjb")
+
+[node name="TextureRect" type="TextureRect" parent="Control/UpgradeMenu/MarginContainer/VBoxContainer/OreValUpgrade"]
+use_parent_material = true
+layout_mode = 2
+texture = SubResource("AtlasTexture_1ptxq")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="WarmUpgrade" type="HBoxContainer" parent="Control/UpgradeMenu/MarginContainer/VBoxContainer" node_paths=PackedStringArray("price_tag")]
+use_parent_material = true
+layout_mode = 2
+script = ExtResource("36_683pa")
+price_tag = NodePath("Label2")
+
+[node name="MyButton" parent="Control/UpgradeMenu/MarginContainer/VBoxContainer/WarmUpgrade" instance=ExtResource("10_1nna4")]
+custom_minimum_size = Vector2(64, 32)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/UpgradeMenu/MarginContainer/VBoxContainer/WarmUpgrade/MyButton"]
+use_parent_material = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Buy"
+label_settings = ExtResource("2_ikgjb")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="Control/UpgradeMenu/MarginContainer/VBoxContainer/WarmUpgrade"]
+use_parent_material = true
+layout_mode = 2
+text = "-20% Freezing"
+label_settings = ExtResource("2_ikgjb")
+
+[node name="Label2" type="Label" parent="Control/UpgradeMenu/MarginContainer/VBoxContainer/WarmUpgrade"]
+use_parent_material = true
+layout_mode = 2
+text = "100"
+label_settings = ExtResource("2_ikgjb")
+
+[node name="TextureRect" type="TextureRect" parent="Control/UpgradeMenu/MarginContainer/VBoxContainer/WarmUpgrade"]
+use_parent_material = true
+layout_mode = 2
+texture = SubResource("AtlasTexture_1ptxq")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="OreQuantUpgrade" type="HBoxContainer" parent="Control/UpgradeMenu/MarginContainer/VBoxContainer" node_paths=PackedStringArray("price_tag")]
+use_parent_material = true
+layout_mode = 2
+script = ExtResource("37_kboe4")
+price_tag = NodePath("Label2")
+
+[node name="MyButton" parent="Control/UpgradeMenu/MarginContainer/VBoxContainer/OreQuantUpgrade" instance=ExtResource("10_1nna4")]
+custom_minimum_size = Vector2(64, 32)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/UpgradeMenu/MarginContainer/VBoxContainer/OreQuantUpgrade/MyButton"]
+use_parent_material = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Buy"
+label_settings = ExtResource("2_ikgjb")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="Control/UpgradeMenu/MarginContainer/VBoxContainer/OreQuantUpgrade"]
+use_parent_material = true
+layout_mode = 2
+text = "+1 Ore Drops"
+label_settings = ExtResource("2_ikgjb")
+
+[node name="Label2" type="Label" parent="Control/UpgradeMenu/MarginContainer/VBoxContainer/OreQuantUpgrade"]
+use_parent_material = true
+layout_mode = 2
+text = "300"
+label_settings = ExtResource("2_ikgjb")
+
+[node name="TextureRect" type="TextureRect" parent="Control/UpgradeMenu/MarginContainer/VBoxContainer/OreQuantUpgrade"]
+use_parent_material = true
+layout_mode = 2
+texture = SubResource("AtlasTexture_1ptxq")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="MyButton" parent="Control/UpgradeMenu" instance=ExtResource("10_1nna4")]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -32.0
+offset_top = -36.0
+offset_right = 32.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 0
+input_shortcut = "ui_cancel"
+
+[node name="Label" type="Label" parent="Control/UpgradeMenu/MyButton"]
+use_parent_material = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Exit"
+label_settings = ExtResource("2_ikgjb")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InventoryWarning" type="Control" parent="Control"]
+visible = false
+use_parent_material = true
+anchors_preset = 0
+offset_left = -1.0
+offset_top = 149.0
+offset_right = 83.0
+offset_bottom = 189.0
+script = ExtResource("38_j6bm2")
+
+[node name="TextureRect" type="TextureRect" parent="Control/InventoryWarning"]
+use_parent_material = true
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -25.0
+offset_top = -19.6667
+offset_right = 15.0
+offset_bottom = 20.3333
+grow_horizontal = 0
+grow_vertical = 2
+texture = SubResource("AtlasTexture_7umv5")
+
+[node name="Label" type="Label" parent="Control/InventoryWarning"]
+use_parent_material = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -40.6667
+offset_top = -17.3333
+offset_right = 20.3333
+offset_bottom = 17.6667
+grow_horizontal = 2
+grow_vertical = 2
+text = "INVENTORY
+FULL"
+label_settings = SubResource("LabelSettings_5dksh")
+
+[node name="WarningSound" type="AudioStreamPlayer" parent="Control/InventoryWarning"]
+stream = ExtResource("17_1jvnl")
+bus = &"UI"
+
+[node name="FreezeWarning" type="Control" parent="Control" node_paths=PackedStringArray("warn_sound")]
+visible = false
+use_parent_material = true
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("39_o8l7i")
+warn_sound = NodePath("AudioStreamPlayer")
+
+[node name="TextureRect2" type="TextureRect" parent="Control/FreezeWarning"]
+use_parent_material = true
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 18.0
+offset_top = 129.333
+offset_right = 58.0
+offset_bottom = 169.333
+grow_horizontal = 0
+grow_vertical = 2
+texture = SubResource("AtlasTexture_7umv5")
+
+[node name="Label2" type="Label" parent="Control/FreezeWarning"]
+use_parent_material = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.6667
+offset_top = 131.667
+offset_right = 41.3333
+offset_bottom = 166.667
+grow_horizontal = 2
+grow_vertical = 2
+text = "FREEZING
+50%"
+label_settings = SubResource("LabelSettings_5dksh")
+
+[node name="TextureRect" type="TextureRect" parent="Control/FreezeWarning"]
+use_parent_material = true
+layout_mode = 0
+offset_left = 88.6667
+offset_top = 150.333
+offset_right = 128.667
+offset_bottom = 190.333
+texture = SubResource("AtlasTexture_mevie")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Control/FreezeWarning"]
+stream = ExtResource("17_1jvnl")
+bus = &"UI"
+
+[node name="MainMenu" type="Control" parent="Control"]
+use_parent_material = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="StartGame" parent="Control/MainMenu" instance=ExtResource("10_1nna4")]
+custom_minimum_size = Vector2(64, 32)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -106.5
+offset_top = -96.0
+offset_right = 106.5
+offset_bottom = -64.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Label" type="Label" parent="Control/MainMenu/StartGame"]
+use_parent_material = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -33.5
+offset_top = -11.5
+offset_right = 33.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Start Game"
+label_settings = ExtResource("2_ikgjb")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StartGame2" parent="Control/MainMenu" instance=ExtResource("10_1nna4")]
+custom_minimum_size = Vector2(64, 32)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -106.5
+offset_top = -48.0
+offset_right = 106.5
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Label" type="Label" parent="Control/MainMenu/StartGame2"]
+use_parent_material = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -33.5
+offset_top = -11.5
+offset_right = 33.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Instructions"
+label_settings = ExtResource("2_ikgjb")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Control/MainMenu"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -128.0
+offset_right = 128.0
+offset_bottom = 108.0
+grow_horizontal = 2
+texture = ExtResource("40_sur5v")
+stretch_mode = 5
+
+[node name="Instructions" type="NinePatchRect" parent="Control/MainMenu"]
+use_parent_material = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -230.0
+offset_top = -232.0
+offset_right = 230.0
+offset_bottom = -64.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = SubResource("AtlasTexture_6x8w1")
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+script = ExtResource("41_kntn7")
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/MainMenu/Instructions"]
+use_parent_material = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 3
+
+[node name="Label" type="Label" parent="Control/MainMenu/Instructions/MarginContainer"]
+use_parent_material = true
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+text = "Use WASD to move, Space Bar to jump, and M to mine. You can mine up or down by holding down the respective key while mining. 
+Hold either A or D to wall climb. While wall climbing you can mine horizontally or upwards.
+Press E to craft torches. Place torches with '1'
+Keep an eye on your temperature meter                   ,get back inside before it runs out. The deeper you go, the colder it is.
+Good luck out there."
+label_settings = ExtResource("2_ikgjb")
+autowrap_mode = 2
+
+[node name="Cold" type="HBoxContainer" parent="Control/MainMenu/Instructions"]
+use_parent_material = true
+layout_mode = 0
+offset_left = 252.0
+offset_top = 110.333
+offset_right = 316.0
+offset_bottom = 117.333
+
+[node name="TextureRect" type="TextureRect" parent="Control/MainMenu/Instructions/Cold"]
+use_parent_material = true
+layout_mode = 2
+texture = SubResource("AtlasTexture_lv05m")
+stretch_mode = 5
+
+[node name="ColdBar" type="TextureProgressBar" parent="Control/MainMenu/Instructions/Cold"]
+use_parent_material = true
+custom_minimum_size = Vector2(0, 7)
+layout_mode = 2
+size_flags_horizontal = 3
+value = 80.0
+rounded = true
+nine_patch_stretch = true
+stretch_margin_left = 1
+stretch_margin_top = 1
+stretch_margin_right = 4
+stretch_margin_bottom = 1
+texture_under = SubResource("AtlasTexture_e7xdn")
+texture_progress = SubResource("AtlasTexture_rv40a")
+texture_progress_offset = Vector2(-1, 0)
+
+[node name="WinScreen" type="NinePatchRect" parent="Control"]
+visible = false
+use_parent_material = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -105.0
+offset_top = -56.5
+offset_right = 105.0
+offset_bottom = 56.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_6x8w1")
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+script = ExtResource("42_l7o8l")
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/WinScreen"]
+use_parent_material = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 3
+
+[node name="Label" type="Label" parent="Control/WinScreen/MarginContainer"]
+use_parent_material = true
+layout_mode = 2
+text = "Congratulations, you satisfied your greedy overlords. Your reward? You get keep your mining permit and continue working."
+label_settings = ExtResource("2_ikgjb")
+autowrap_mode = 2
+
+[connection signal="button_pressed" from="Control/PopupMenu/CraftingMenu/MarginContainer/HBoxContainer/TorchCraftButton" to="Control/PopupMenu/CraftingMenu" method="_on_torch_craft_button_button_pressed"]
+[connection signal="button_pressed" from="Control/PayoutSummary/MyButton" to="Control/PayoutSummary" method="_on_my_button_button_pressed"]
+[connection signal="button_pressed" from="Control/Confirm/MarginContainer/VBoxContainer/BoxContainer/ConfirmNo" to="." method="_on_confirm_no_button_pressed"]
+[connection signal="button_pressed" from="Control/Confirm/MarginContainer/VBoxContainer/BoxContainer/ConfirmYes" to="." method="_on_confirm_yes_button_pressed"]
+[connection signal="button_pressed" from="Control/UpgradeMenu/MarginContainer/VBoxContainer/SpeedUpgrade/MyButton" to="Control/UpgradeMenu/MarginContainer/VBoxContainer/SpeedUpgrade" method="_on_my_button_button_pressed"]
+[connection signal="button_pressed" from="Control/UpgradeMenu/MarginContainer/VBoxContainer/GemUpgrade/MyButton" to="Control/UpgradeMenu/MarginContainer/VBoxContainer/GemUpgrade" method="_on_my_button_button_pressed"]
+[connection signal="button_pressed" from="Control/UpgradeMenu/MarginContainer/VBoxContainer/CapUpgrade/MyButton" to="Control/UpgradeMenu/MarginContainer/VBoxContainer/CapUpgrade" method="_on_my_button_button_pressed"]
+[connection signal="button_pressed" from="Control/UpgradeMenu/MarginContainer/VBoxContainer/OreValUpgrade/MyButton" to="Control/UpgradeMenu/MarginContainer/VBoxContainer/OreValUpgrade" method="_on_my_button_button_pressed"]
+[connection signal="button_pressed" from="Control/UpgradeMenu/MarginContainer/VBoxContainer/WarmUpgrade/MyButton" to="Control/UpgradeMenu/MarginContainer/VBoxContainer/WarmUpgrade" method="_on_my_button_button_pressed"]
+[connection signal="button_pressed" from="Control/UpgradeMenu/MarginContainer/VBoxContainer/OreQuantUpgrade/MyButton" to="Control/UpgradeMenu/MarginContainer/VBoxContainer/OreQuantUpgrade" method="_on_my_button_button_pressed"]
+[connection signal="button_pressed" from="Control/UpgradeMenu/MyButton" to="Control/UpgradeMenu" method="_on_my_button_button_pressed"]
+[connection signal="button_pressed" from="Control/MainMenu/StartGame" to="." method="_on_start_game_button_pressed"]
+[connection signal="button_pressed" from="Control/MainMenu/StartGame2" to="Control/MainMenu/Instructions" method="_on_start_game_2_button_pressed"]

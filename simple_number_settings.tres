@@ -1,0 +1,7 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://dli8jq3q3ryud"]
+
+[ext_resource type="FontFile" uid="uid://dc3m5mp1qmile" path="res://font/PixelOperator.ttf" id="1_ka0iv"]
+
+[resource]
+font = ExtResource("1_ka0iv")
+shadow_size = 0

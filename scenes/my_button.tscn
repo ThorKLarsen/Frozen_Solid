@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://dv6ih4eug8pv6"]
+
+[ext_resource type="Texture2D" uid="uid://dkrfphw8ydgar" path="res://assets/rock_tilesheet.png" id="1_0iknv"]
+[ext_resource type="Script" path="res://scenes/my_button.gd" id="2_3md6w"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y7keu"]
+atlas = ExtResource("1_0iknv")
+region = Rect2(10, 89, 6, 5)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ifgeu"]
+atlas = ExtResource("1_0iknv")
+region = Rect2(10, 98, 6, 3)
+
+[node name="MyButton" type="TextureRect" node_paths=PackedStringArray("top_button")]
+use_parent_material = true
+custom_minimum_size = Vector2(64, 0)
+offset_right = 64.0
+offset_bottom = 32.0
+texture = SubResource("AtlasTexture_y7keu")
+script = ExtResource("2_3md6w")
+top_button = NodePath("TopButton")
+
+[node name="TopButton" type="TextureRect" parent="."]
+use_parent_material = true
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_ifgeu")
