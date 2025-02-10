@@ -1,4 +1,5 @@
-A small mining game made for the "1-BIT JAM #5" set in a twisted ever-changing icescape on a distant mining planet.
+This game was made for the "1-BIT JAM #5" game jam in 7 days.
+A small mining game set in a twisted ever-changing icescape on a distant mining planet.
 You can play/download the game here: https://asimithehero.itch.io/frozen-solid
 
 Your boss demands you hand him ores worth 10.000 credits before 10 days, but the frost reaches deep and you don't have any other tools than your trusty pickaxe. 
