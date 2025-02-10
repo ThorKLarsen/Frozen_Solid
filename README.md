@@ -23,7 +23,3 @@ E - Crafting menu (Yes you can only craft torches. No i don't think it's stupid 
 Additionally you can wall climb by holding A or D respectively. You can also mine either left/right or up while wall climbing.
 
 The visual assets are all made by me during the jam and a provided here for your use in any commercial or non-commercial project, completely free with no attribution required.
-The sound effects are by:
-
-    8-bit sound pack' by Beep Yeah! https://beepyeah.itch.io/8-bit-sfx-pack
-    Ovani Sound https://ovanisound.com/
