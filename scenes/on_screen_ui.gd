@@ -1,4 +1,5 @@
 class_name OnScreenUI extends CanvasLayer
+# Used for interfacing with the UI
 
 signal confirm_result(is_confirmed)
 signal game_started

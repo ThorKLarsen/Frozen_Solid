@@ -65,15 +65,16 @@ func spawn_monster(pos: Vector2i, scene: PackedScene):
 	add_child(monster)
 	monster.position = tilemaps.tiles.map_to_local(pos)
 
-
+# House door trigger. Ends the day
 func _on_trigger_target_entered():
 	var confirm
-	print(GameData.cold)
+	# If cold is below 25 we just end the day, otherwise we prompt the player.
 	if GameData.cold > 25:
 		confirm = await ui.do_confirm("Are you done mining for the day?")
 	else:
 		confirm = true
 	if confirm:
+		# Load the house scene and unload this one.
 		GameData.end_day()
 		var house_scene = Constants.SCENE_HOUSE
 		var house = house_scene.instantiate()

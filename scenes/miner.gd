@@ -14,6 +14,20 @@ var mining_speed: float:
 		return GameData.mining_speed
 var attack_damage = 1
 
+enum AnimationState{
+	IDLE = 0,
+	WALK = 1,
+	JUMP = 2,
+	FALL = 3,
+	MINE = 4,
+	MINE_DOWN = 5,
+	MINE_WIND_DOWN = 6,
+	MINE_DOWN_WIND_DOWN = 7,
+	WALL_CLIMB = 8,
+	MINE_WALL_CLIMB = 9
+}
+var state = AnimationState.IDLE
+
 var is_mining = false
 var mining_states = [
 	AnimationState.MINE,
@@ -43,6 +57,7 @@ func _physics_process(delta):
 	var wall_check = check_walls()
 	is_wall_climbing = is_on_wall() and (Input.is_action_pressed('ui_left') or Input.is_action_pressed('ui_right'))
 	
+	# Mine input
 	if Input.is_action_pressed("mine") and not (state in mining_states):
 		if is_on_floor():
 			if Input.is_action_pressed("ui_down"):
@@ -52,6 +67,7 @@ func _physics_process(delta):
 				set_animation_state(AnimationState.MINE)
 				mining_direction = Vector2i(0, -1)
 			else:
+				# We use the sprite scale to keep track of the players facing direction
 				set_animation_state(AnimationState.MINE)
 				mining_direction = Vector2i(sprite.scale.x, 0)
 		elif is_wall_climbing:
@@ -82,10 +98,13 @@ func _physics_process(delta):
 		if is_on_floor():
 			velocity.y = JUMP_VELOCITY
 		elif check_walls() != 0:
+			# Give a small horizontal speed when leaving a wall.
 			velocity.y = JUMP_VELOCITY
 			velocity.x = SPEED * -check_walls()
 	
 	if is_on_floor() and not (state in mining_states):
+		# Its important that the walking animation is tied to input rather than
+		# velocity, since we don't want it while sliding on the ice.
 		if Input.is_action_pressed('ui_left') or Input.is_action_pressed('ui_right'):
 			set_animation_state(AnimationState.WALK)
 		else:
@@ -99,17 +118,19 @@ func _physics_process(delta):
 	turn_sprite()
 	move_and_slide()
 
-
+# Handles gravity and ice.
 func update_velocity(delta):
 	if is_on_floor():
-		if is_on_ice(): #If there is Ie directly below.
+		if is_on_ice(): #If there is Ice directly below.
 			velocity.x -= velocity.x * 0.3 * delta
 		else:
 			velocity.x = 0
+	# If the velocity is low enough, just set to zero. This reduces stuttering
 	if abs(velocity.x) <= 50:
 			velocity.x = 0
 	if not is_on_floor():
 		velocity += get_gravity() * delta
+		# Increase the gravity after the apex. Helps not making the controls feel too floaty
 		if velocity.y > 50:
 			velocity += get_gravity() * delta * min((velocity.y/200), 2)
 
@@ -136,20 +157,8 @@ func turn_sprite():
 		sprite.scale = Vector2(-1, 1)
 		sprite.position.x = -2
 
-enum AnimationState{
-	IDLE = 0,
-	WALK = 1,
-	JUMP = 2,
-	FALL = 3,
-	MINE = 4,
-	MINE_DOWN = 5,
-	MINE_WIND_DOWN = 6,
-	MINE_DOWN_WIND_DOWN = 7,
-	WALL_CLIMB = 8,
-	MINE_WALL_CLIMB = 9
-}
-var state = AnimationState.IDLE
-
+# Set the animation state and plays the associated animation.
+# The mining animations are scaled based on mining speed 
 func set_animation_state(new_state: AnimationState):
 	if new_state == state:
 		return
@@ -179,6 +188,7 @@ func set_animation_state(new_state: AnimationState):
 		AnimationState.MINE_DOWN_WIND_DOWN:
 			sprite.play('mine_down_wind_down', mining_speed)
 
+# Activated the attack hitbox until animation end.
 func attack():
 	attack_hitbox.monitoring = true
 	for body in attack_hitbox.get_overlapping_bodies():
@@ -188,20 +198,19 @@ func _attack_end():
 	attack_hitbox.monitoring = false
 	attack_hitbox.scale.x = 1
 
+# Checks if the body can be attacked
 func attempt_attack_body(body: Node2D):
 	if body.is_in_group('enemy'):
-		body.damage(attack_damage, self)
+		if body.has_method('damage'):
+			body.damage(attack_damage, self)
 
 func damage(value: float, source: Node2D):
 	GameData.damage_health(value)
 
 
-func place_torch(coords: Vector2i):
-	pass
-
-
 ## === SIGNAL CATCHERS ===
 
+# Called on animation finish. Used for mining logic
 func _on_animated_sprite_2d_animation_finished():
 	if is_mining:
 		_attack_end()
@@ -221,11 +230,11 @@ func _on_animated_sprite_2d_animation_finished():
 		else:
 			set_animation_state(AnimationState.IDLE)
 
-
+# Called when a body enters attack hitbox
 func _on_area_2d_body_entered(body):
 	attempt_attack_body(body)
 
-
+# Used for mining logic when the pickaxe hits and to play sound. 
 func _on_animated_sprite_2d_frame_changed():
 	if state in mining_states and sprite.frame == 1:
 		attack()

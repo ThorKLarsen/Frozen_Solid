@@ -60,9 +60,11 @@ var break_fade_time = 2
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	# Randomize the noize maps
 	ore_noise.seed = randi()
 	ice_noise.seed = randi()
 	cave_noise.seed = randi()
+	
 	player.mine_block.connect(_on_player_mine_tile)
 
 func _input(event):
@@ -73,37 +75,48 @@ func _input(event):
 				if GameData.inventory.remove_items(GameData.ItemTypes.TORCH, 1):
 					place_torch(coords)
 
+# Generates the map from noise functions and sets up the tile map layers
 func generate_map():
+	# Iterate over each tile
 	for i in range(map_width):
 		for j in range(-sky_height, map_depth):
+			# Initialize light map
 			light_map[Vector2i(i, j)] = 0
+			
+			# Set edge tiles to bedrock. (The left and right are outside view of the camera.)
 			if i == 0 or i == map_width-1 or j == map_depth-1:
 				set_tile(Vector2i(i, j), TileType.UNBREAKABLE, false)
+			# Set above ground tiles to air
 			elif j < 0:
 				set_tile(Vector2i(i, j), TileType.AIR, false)
 			else:
 				var type
 				type = get_tile_from_noise(Vector2i(i, j))
+				# Top two layers can't be air.
 				if j <= 1 and type == TileType.AIR:
 					type = TileType.ROCK
+				# Set gems. Probability depends on depth.
 				if randf() > lerp(0.99, 0.85, float(j)/float(map_depth)):
 					type = TileType.GEM
 				set_tile(Vector2i(i, j), type, false)
 	 
+	# This function is needlessly complicated since i removed surface cave openings, but oh well
 	setup_light_map()
 	
+	# Finally add the rock outline. 
 	for i in range(map_width):
 		for j in range(-sky_height, map_depth):
 			update_tile(Vector2i(i, j))
 			update_rock_outline(Vector2i(i, j))
 	
 
-
+# Sets a tile to the given type.
 func set_tile(coords: Vector2i, type: TileType, do_update = true):
 	tile_type_map[coords] = type
 	if do_update:
 		update_tile(coords)
 
+# Set a tile to air
 func empty_tile(coords: Vector2i):
 	#tiles.set_cell(pos, 0, Vector2i(4, 4))
 	set_tile(coords, TileType.AIR)
@@ -112,6 +125,8 @@ func empty_tile(coords: Vector2i):
 func place_torch(coords: Vector2i):
 	set_tile(coords, TileType.TORCH)
 
+# Updates a tile to match its type and light level etc.
+# This should only be used when a tile changes.
 func update_tile(coords: Vector2i):
 	var type = tile_type_map[coords]
 	var atlas_coords = Vector2i(0, 0)
@@ -156,12 +171,13 @@ func setup_light_map():
 					light_map[coords] = air_tile_max_light_level
 					update_light_map_from_source(coords)
 
+# Update the light map after placeing a new light source. 
+# This should only be called after source has had its only light level set.
 func update_light_map_from_source(coords: Vector2i, do_update = false):
 	var source_light = light_map[coords]
 	_update_light_map_from_source_recursive(coords, source_light, do_update)
-	#if do_update:
-		#update_tile(coords)
 
+# Recurive function for above
 func _update_light_map_from_source_recursive(coords, light_level, do_update):
 	light_level -= 1
 	if light_level <= 0:
@@ -181,6 +197,7 @@ func _update_light_map_from_source_recursive(coords, light_level, do_update):
 func get_tile_light_level(coords: Vector2i, update_source = null) -> int:
 	return light_map[coords]
 
+# Checks to see if a tile is inside the map bounds.
 func is_inside_map(coords: Vector2i) -> bool:
 	if coords.y < -sky_height or coords.y >= map_depth:
 		return false
@@ -188,6 +205,7 @@ func is_inside_map(coords: Vector2i) -> bool:
 		return false
 	return true
 
+# updates the rock outline layers
 func update_rock_outline(coords: Vector2i):
 	var matches = [TileType.ROCK, TileType.ORE]
 	if tile_type_map[coords] in matches:
@@ -202,6 +220,7 @@ func update_rock_outline(coords: Vector2i):
 	else:
 		rock_outline.erase_cell(coords)
 
+# Returns the tiles atlas coords based on naeighbor flags
 func get_tile_texture_coords_from_neighbors(
 	center: Vector2i, left: bool, right: bool, up: bool, down: bool
 ):
@@ -220,6 +239,7 @@ func get_tile_texture_coords_from_neighbors(
 		texture_coords += Vector2i(0, 1)
 	return texture_coords
 
+# Simple function to interperate the noise data
 func get_tile_from_noise(coords: Vector2i):
 	var type = TileType.ROCK
 	if ore_noise.get_noise_2dv(coords) > ore_threshold:
@@ -230,7 +250,7 @@ func get_tile_from_noise(coords: Vector2i):
 		type = TileType.ICE
 	return type
 
-
+## === Signal catchers ===
 
 func _on_player_mine_tile(pos, dir):
 	var mine_pos = tiles.local_to_map(pos) + dir
@@ -258,9 +278,8 @@ func _on_player_mine_tile(pos, dir):
 	var tile_coords = break_sprite_coords[breaking_tiles[mine_pos][0]]
 	break_progress.set_cell(mine_pos, 0, tile_coords)
 	breaking_tiles[mine_pos][1] = break_fade_time
-	
 
-
+# Updates the light map when a tile is broken
 func _on_tile_broken(coords):
 	var neighbors = [Vector2i(-1, 0), Vector2i(1, 0), Vector2i(0, -1), Vector2i(0, 1)]
 	for n in neighbors:
@@ -270,7 +289,7 @@ func _on_tile_broken(coords):
 		if tile_type_map[neighbor_coords] == TileType.AIR:
 			update_light_map_from_source(neighbor_coords, true)
 
-
+# Adds the loot from the breaking tile.
 func _on_tile_breaking(coords):
 	var type = tile_type_map[coords]
 	if type == TileType.ROCK:
