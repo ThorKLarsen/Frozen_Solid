@@ -1,9 +1,9 @@
 [gd_scene load_steps=69 format=3 uid="uid://blsb5no04kqj4"]
 
 [ext_resource type="Texture2D" uid="uid://dkrfphw8ydgar" path="res://assets/rock_tilesheet.png" id="1_f57up"]
-[ext_resource type="Material" uid="uid://dm4rlevqxr3m8" path="res://game_shader.tres" id="1_hn1m1"]
+[ext_resource type="Material" uid="uid://dm4rlevqxr3m8" path="res://settings/game_shader.tres" id="1_hn1m1"]
 [ext_resource type="Script" path="res://scenes/on_screen_ui.gd" id="1_oyxrn"]
-[ext_resource type="LabelSettings" uid="uid://dli8jq3q3ryud" path="res://simple_number_settings.tres" id="2_ikgjb"]
+[ext_resource type="LabelSettings" uid="uid://dli8jq3q3ryud" path="res://settings/simple_number_settings.tres" id="2_ikgjb"]
 [ext_resource type="Script" path="res://scenes/health_bar.gd" id="3_60ec0"]
 [ext_resource type="Script" path="res://scenes/stone_counter.gd" id="3_bsl3i"]
 [ext_resource type="Script" path="res://scenes/cold_bar.gd" id="3_hbsyg"]

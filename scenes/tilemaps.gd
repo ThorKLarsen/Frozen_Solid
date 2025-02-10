@@ -1,4 +1,4 @@
-extends Node2D
+class_name Tilemaps extends Node2D
 
 @export var game_manager: Node2D
 @export var player: CharacterBody2D
@@ -64,7 +64,6 @@ func _ready():
 	ice_noise.seed = randi()
 	cave_noise.seed = randi()
 	player.mine_block.connect(_on_player_mine_tile)
-	generate_map()
 
 func _input(event):
 	if event.is_action_pressed("place_torch"):

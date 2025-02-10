@@ -1,8 +1,8 @@
 [gd_scene load_steps=17 format=4 uid="uid://c7pa820fu0ro5"]
 
-[ext_resource type="Material" uid="uid://dm4rlevqxr3m8" path="res://game_shader.tres" id="1_aa1ca"]
+[ext_resource type="Material" uid="uid://dm4rlevqxr3m8" path="res://settings/game_shader.tres" id="1_aa1ca"]
 [ext_resource type="Script" path="res://scenes/house.gd" id="1_gbk0d"]
-[ext_resource type="TileSet" uid="uid://1do7ydqohww" path="res://tileset.tres" id="1_k54kn"]
+[ext_resource type="TileSet" uid="uid://1do7ydqohww" path="res://settings/tileset.tres" id="1_k54kn"]
 [ext_resource type="PackedScene" uid="uid://xg6evqvx3gc1" path="res://scenes/miner.tscn" id="2_v5ldq"]
 [ext_resource type="Texture2D" uid="uid://dkrfphw8ydgar" path="res://assets/rock_tilesheet.png" id="3_j1upx"]
 [ext_resource type="Script" path="res://scenes/boss.gd" id="4_08ycj"]

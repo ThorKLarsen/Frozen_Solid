@@ -1,8 +1,8 @@
 [gd_scene load_steps=37 format=4 uid="uid://b6navctmugfe2"]
 
-[ext_resource type="TileSet" uid="uid://1do7ydqohww" path="res://tileset.tres" id="1_4ogtq"]
+[ext_resource type="TileSet" uid="uid://1do7ydqohww" path="res://settings/tileset.tres" id="1_4ogtq"]
 [ext_resource type="PackedScene" uid="uid://xg6evqvx3gc1" path="res://scenes/miner.tscn" id="1_8xi8i"]
-[ext_resource type="Material" uid="uid://dm4rlevqxr3m8" path="res://game_shader.tres" id="1_m4v0b"]
+[ext_resource type="Material" uid="uid://dm4rlevqxr3m8" path="res://settings/game_shader.tres" id="1_m4v0b"]
 [ext_resource type="Script" path="res://scenes/tilemaps.gd" id="2_c7mqw"]
 [ext_resource type="Script" path="res://scenes/game.gd" id="2_viod6"]
 [ext_resource type="Texture2D" uid="uid://b1xr1mo43imbu" path="res://assets/rock_tilesheet_big.png" id="3_x5a02"]
